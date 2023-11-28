@@ -89,7 +89,8 @@ class RailWay(unittest.TestCase):
         self.driver.find_element_by_id("password").send_keys("Bachni1002@")
         self.driver.find_element_by_id("confirmPassword").send_keys("Bachni1002@")
         self.driver.find_element_by_id("pid").send_keys("0828452340")
-        self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input').click()
+        button = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        button.click()
         actual_result=self.driver.find_element_by_xpath('//*[@id="content"]/p')
         expected_result="Thank you for registering your account"
         self.assertEqual(actual_result,expected_result)
