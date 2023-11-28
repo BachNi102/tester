@@ -85,12 +85,25 @@ class RailWay(unittest.TestCase):
         self.test6_check_additional_page(button_name="Log out", is_check_click_tab=False)
     def test7(self):
         self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[7]/a').click()
-        self.driver.find_element_by_id("email").send_keys("ni@gmail.com")
+        self.driver.find_element_by_id("email").send_keys("nni@gmail.com")
         self.driver.find_element_by_id("password").send_keys("Bachni1002@")
         self.driver.find_element_by_id("confirmPassword").send_keys("Bachni1002@")
         self.driver.find_element_by_id("pid").send_keys("0828452340")
         button = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
         button.click()
-        actual_result=self.driver.find_element_by_xpath('//*[@id="content"]/p')
+        actual_result=self.driver.find_element_by_xpath('//*[@id="content"]/p').text
         expected_result="Thank you for registering your account"
         self.assertEqual(actual_result,expected_result)
+
+    def test8(self):
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
+        self.username_input = self.driver.find_element_by_id("username")
+        username = "nni@gmail.com"
+        self.username_input.send_keys(username)
+        self.password = self.driver.find_element_by_id("password")
+        self.password.send_keys("Bachni1002@")
+        element = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        element.click()
+        actual_result = self.driver.find_element_by_xpath("//*[contains(text(),'Welcome to Safe Railway')]").text
+        expected_result = "Invalid username or password. Please try again."
+        self.assertEqual(expected_result,actual_result)
