@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 class RailWay(unittest.TestCase):
     @classmethod
     def setUp(self):
-        self.driver = webdriver.Chrome("C:/chromedriver.exe")
+        self.driver = webdriver.Chrome('D:/driver/chromedriver-win64/chromedriver.exe')
         self.driver.maximize_window()
         self.driver.get("http://railwayb1.somee.com")
     def test_1_successlogin(self):
@@ -80,8 +80,8 @@ class RailWay(unittest.TestCase):
         self.username_input = self.driver.find_element_by_id("username").send_keys("thanhle@logigear.com")
         self.password = self.driver.find_element_by_id("password").send_keys("12345678")
         self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input').click()
-        self.check_additional_page(button_name="My ticket", expect_page_title="Manage ticket", is_check_click_tab=True)
-        self.check_additional_page(button_name="Change password", expect_page_title="Change password",is_check_click_tab=True)
-        self.check_additional_page(button_name="Log out", is_check_click_tab=False)
+        self.test6_check_additional_page(button_name="My ticket", expect_page_title="Manage ticket", is_check_click_tab=True)
+        self.test6_check_additional_page(button_name="Change password", expect_page_title="Change password",is_check_click_tab=True)
+        self.test6_check_additional_page(button_name="Log out", is_check_click_tab=False)
     def test7(self):
         print("User can create new account")
