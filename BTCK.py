@@ -84,4 +84,13 @@ class RailWay(unittest.TestCase):
         self.test6_check_additional_page(button_name="Change password", expect_page_title="Change password",is_check_click_tab=True)
         self.test6_check_additional_page(button_name="Log out", is_check_click_tab=False)
     def test7(self):
-        print("User can create new account")
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[7]/a').click()
+        self.driver.find_element_by_id("email").send_keys("ni@gmail.com")
+        self.driver.find_element_by_id("password").send_keys("Bachni1002@")
+        self.driver.find_element_by_id("confirmPassword").send_keys("Bachni1002@")
+        self.driver.find_element_by_id("pid").send_keys("0828452340")
+        button = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        button.click()
+        actual_result=self.driver.find_element_by_xpath('//*[@id="content"]/p')
+        expected_result="Thank you for registering your account"
+        self.assertEqual(actual_result,expected_result)
