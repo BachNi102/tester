@@ -107,3 +107,27 @@ class RailWay(unittest.TestCase):
         actual_result = self.driver.find_element_by_xpath("//*[contains(text(),'Welcome to Safe Railway')]").text
         expected_result = "Invalid username or password. Please try again."
         self.assertEqual(expected_result,actual_result)
+
+    def test9(self):
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
+        self.username_input = self.driver.find_element_by_id("username")
+        username = "nni@gmail.com"
+        self.username_input.send_keys(username)
+        self.password = self.driver.find_element_by_id("password")
+        self.password.send_keys("Bachni1002@")
+        element = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        element.click()
+        self.changepassword = self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
+        self.password = self.driver.find_element_by_id("currentPassword")
+        self.password.send_keys("Bachni1002@")
+        self.passwords = self.driver.find_element_by_id("newPassword")
+        self.passwords.send_keys("Bachni")
+        self.passwords = self.driver.find_element_by_id("confirmPassword")
+        self.passwords.send_keys("Bachni")
+        btnchange = self.driver.find_element_by_xpath('//*[@id="ChangePW"]/fieldset/p/input')
+        btnchange.click()
+        actual_result = self.driver.find_element_by_xpath('//*[@id="ChangePW"]/fieldset/p[1]').text
+        expected_result = "Your password has been updated"
+        self.assertEqual(expected_result, actual_result)
+
+
