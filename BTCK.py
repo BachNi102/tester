@@ -130,4 +130,28 @@ class RailWay(unittest.TestCase):
         expected_result = "Your password has been updated"
         self.assertEqual(expected_result, actual_result)
 
+    def test10(self):
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[7]/a').click()
+        self.driver.find_element_by_id("email").send_keys("nhi@gmail.com")
+        self.driver.find_element_by_id("password").send_keys("nhi123")
+        self.driver.find_element_by_id("confirmPassword").send_keys("nhi1234")
+        self.driver.find_element_by_id("pid").send_keys("0828452340")
+        button = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        button.click()
+        actual_result = self.driver.find_element_by_xpath('//*[@id="content"]/p[2]').text
+        expected_result = 'There\'re errors in the form. Please correct the errors and try again.'
+        self.assertEqual(actual_result, expected_result)
+    def test11(self):
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[7]/a').click()
+        self.driver.find_element_by_id("email").send_keys("nhi@gmail.com")
+        self.driver.find_element_by_id("password").send_keys("")
+        self.driver.find_element_by_id("confirmPassword").send_keys("")
+        self.driver.find_element_by_id("pid").send_keys("")
+        button = self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input')
+        button.click()
+        actual_result = self.driver.find_element_by_xpath('//*[@id="content"]/p[2]').text + self.driver.find_element_by_xpath('//*[@id="RegisterForm"]/fieldset/ol/li[2]/label[2]').text + self.driver.find_element_by_xpath('//*[@id="RegisterForm"]/fieldset/ol/li[4]/label[2]').text
+        expected_result = 'There\'re errors in the form. Please correct the errors and try again.' + 'Invalid password length.' + 'Invalid ID length.'
+        self.assertEqual(expected_result,actual_result)
+
+
 
