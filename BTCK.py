@@ -10,7 +10,7 @@ class RailWay(unittest.TestCase):
         self.driver.maximize_window()
         self.driver.get("http://railwayb1.somee.com")
     def test_1_successlogin(self):
-        self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
         self.username_input= self.driver.find_element_by_id("username")
         username = "thanhle@logigear.com"
         self.username_input.send_keys(username)
@@ -27,7 +27,7 @@ class RailWay(unittest.TestCase):
          #   print("User is not logged in or welcome message is not displayed correctly.")
         #print(expected_message)
     def test_2_usernamblank(self):
-        self.username = self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
+        self.username = self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
         self.password = self.driver.find_element_by_id("password")
         self.password.send_keys("12345678")
         self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input').click()
@@ -35,7 +35,7 @@ class RailWay(unittest.TestCase):
         expected_message = "There was a problem with your login and/or errors exist in your form."
         self.assertEqual(expected_message, actual_text)
     def test_3_invalidpassword(self):
-        self.username = self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
+        self.username = self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
         self.username = self.driver.find_element_by_id("username")
         self.username.send_keys("thanhle@logigear.com")
         self.password = self.driver.find_element_by_id("password")
@@ -49,7 +49,7 @@ class RailWay(unittest.TestCase):
         loginpage= self.driver.title
         assert re.search("Login", loginpage)
     def test_5_severalpassword(self):
-        self.username = self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
+        self.username = self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
         username_input = self.driver.find_element_by_id("username")
         username_input.send_keys("thanhle@logigear.com")
         for _ in range(3):
@@ -65,32 +65,6 @@ class RailWay(unittest.TestCase):
         expected_error_message = "Manage ticket"
         self.assertEqual(Myticketpage,expected_error_message)
         print(Myticketpage)
-    def test_6(self):
-        self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
-        self.username_input = self.driver.find_element_by_id("username").send_keys("thanhle@logigear.com")
-        self.password = self.driver.find_element_by_id("password").send_keys("12345678")
-        self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input').click()
-
-        my_ticket_tab = self.driver.find_element_by_link_text("My ticket")
-        change_password_tab = self.driver.find_element_by_link_text("Change password")
-        logout_tab = self.driver.find_element_by_link_text("Log out")
-        print("My ticket tab is displayed:", my_ticket_tab.is_displayed())
-        print("Change password tab is displayed:", change_password_tab.is_displayed())
-        print("Logout tab is displayed:", logout_tab.is_displayed())
-        my_ticket_tab.click()
-        my_ticket_page_title = self.driver.find_element_by_xpath('//*[@id="content"]/h1').text
-        expected_page_title = "Manage ticket"
-        if my_ticket_page_title == expected_page_title:
-            print("User is directed to the My ticket page")
-        else:
-            print("User is not directed to the My ticket page")
-        change_password_tab = self.driver.find_element_by_link_text("Change password")
-        change_password_tab.click()
-
-
-    def test7(self):
-        print("User can create new account")
-
     def test6_check_additional_page(self, button_name: str, expect_page_title: str = '', is_check_click_tab: bool = True):
         tab = self.driver.find_element_by_link_text(button_name)
         print(f"{button_name} tab is displayed:", tab.is_displayed())
@@ -102,10 +76,12 @@ class RailWay(unittest.TestCase):
             else:
                 print(f"User is not directed to the {button_name} page")
     def test_6(self):
-        self.driver.find_element_by_xpath("/html/body/div[1]/div[1]/div[2]/ul/li[8]/a/span").click()
+        self.driver.find_element_by_xpath('//*[@id="menu"]/ul/li[8]/a').click()
         self.username_input = self.driver.find_element_by_id("username").send_keys("thanhle@logigear.com")
         self.password = self.driver.find_element_by_id("password").send_keys("12345678")
         self.driver.find_element_by_xpath('//*[@id="content"]/form/fieldset/p/input').click()
         self.check_additional_page(button_name="My ticket", expect_page_title="Manage ticket", is_check_click_tab=True)
         self.check_additional_page(button_name="Change password", expect_page_title="Change password",is_check_click_tab=True)
         self.check_additional_page(button_name="Log out", is_check_click_tab=False)
+    def test7(self):
+        print("User can create new account")
